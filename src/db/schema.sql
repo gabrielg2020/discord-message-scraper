@@ -1,0 +1,15 @@
+CREATE TABLE messages (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  content TEXT NOT NULL,
+  timestamp TEXT NOT NULL,
+  isRelevant INTEGER NOT NULL,
+  conversation INTEGER
+);
+
+CREATE TABLE conversation (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  topic TEXT NOT NULL
+);
+
+
+

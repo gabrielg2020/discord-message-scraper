@@ -137,3 +137,6 @@ dist
 
 # Blacklisted users
 src/blacklist.json
+
+# Database file
+src/db/database.db
