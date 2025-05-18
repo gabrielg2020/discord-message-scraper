@@ -1,0 +1,34 @@
+{
+  "name": "discord-message-scraper",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "ts-node src/index.ts",
+    "build": "tsc",
+    "dev": "ts-node-dev src/index.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gabrielg2020/discord-message-scraper.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gabrielg2020/discord-message-scraper/issues"
+  },
+  "homepage": "https://github.com/gabrielg2020/discord-message-scraper#readme",
+  "description": "",
+  "dependencies": {
+    "@discordjs/rest": "^2.5.0",
+    "@types/node": "^22.15.18",
+    "discord-api-types": "^0.38.8",
+    "discord.js": "^14.19.3",
+    "dotenv": "^16.5.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
+  },
+  "devDependencies": {
+    "ts-node-dev": "^2.0.0"
+  }
+}
