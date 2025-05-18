@@ -29,7 +29,9 @@ client.once(Events.ClientReady, (readyClient) => {
 // Listen for messages
 client.on(Events.MessageCreate, async (message) => {
   if (!blacklist.isMemberBlacklisted(message.author.username)) {
-    console.log(message.content)
+    dbManager.addMessage(message.content, new Date(message.createdTimestamp));
+  } else {
+    dbManager.addMessage("Blocked Message", new Date());
   }
 });
 
