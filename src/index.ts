@@ -1,9 +1,13 @@
 import { Client, Events, GatewayIntentBits } from 'discord.js';
 import * as dotenv from 'dotenv';
 import { Blacklist } from './utils/blacklist';
+import { DatabaseManager } from './utils/db';
 
 // Load env variables
 dotenv.config();
+
+// Create and initalise DatabaseManager
+const dbManager = new DatabaseManager;
 
 // Create Client
 const client = new Client({
