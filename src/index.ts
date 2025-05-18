@@ -1,5 +1,6 @@
 import { Client, Events, GatewayIntentBits } from 'discord.js';
 import * as dotenv from 'dotenv';
+import { Blacklist } from './utils/blacklist';
 
 // Load env variables
 dotenv.config();
@@ -13,15 +14,18 @@ const client = new Client({
   ]
 })
 
+// Create Blacklist
+const blacklist = new Blacklist;
+
 client.once(Events.ClientReady, (readyClient) => {
   console.log(`Ready! Logged in as ${readyClient.user.tag}`)
+  console.log(`Blacklist: ${blacklist.memebers}`)
 })
 
 // Listen for messages
 client.on(Events.MessageCreate, async (message) => {
-  console.log(message.content)
-  if (message.content === '!ping') {
-    await message.reply('Pong!');
+  if (!blacklist.isMemberBlacklisted(message.author.username)) {
+    console.log(message.content)
   }
 });
 
