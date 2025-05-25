@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "start": "ts-node src/index.ts",
-    "build": "tsc",
+    "build": "tsc && copyfiles -u 1 'src/db/**/*.{db,sql}' 'src/blacklist.json' dist/",
     "dev": "ts-node-dev src/index.ts"
   },
   "repository": {
@@ -31,6 +31,7 @@
     "typescript": "^5.8.3"
   },
   "devDependencies": {
+    "copyfiles": "^2.4.1",
     "ts-node-dev": "^2.0.0"
   }
 }
