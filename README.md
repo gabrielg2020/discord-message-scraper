@@ -39,7 +39,6 @@ If you are going to use this on your own server please give members a way of opt
     ```bash
     docker run --env-file .env discord-scraper-bot:latest
     ```
-    ```
 
 ## License
 
