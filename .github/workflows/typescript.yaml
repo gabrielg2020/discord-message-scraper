@@ -1,0 +1,21 @@
+name: TypeScript Workflow
+
+on:
+  workflow_call:
+
+jobs:
+  go-lint:
+    name: Lint TypeScript Code
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup TypeScript
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.x
+
+      #  TODO: add linting
+      #  name: Run Lint
+      #  uses:
