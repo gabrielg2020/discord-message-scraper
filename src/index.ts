@@ -33,16 +33,18 @@ client.on(Events.MessageCreate, async (message) => {
   let textContent = "Blocked Message Content";
   let timestamp = new Date();
   let channelName = "Blocked Message Channel";
+  let messageID = "Blocked Message ID";
 
 	if (!blacklist.isMemberBlacklisted(message.author.username)) {
     // Get data
     textContent = message.content;
     timestamp = new Date(message.createdTimestamp);
     channelName = (message.channel as GuildChannel).name;
+    messageID = message.id;
   }
   
   // Store in database
-	dbManager.addMessage(textContent, timestamp, channelName);
+	dbManager.addMessage(textContent, timestamp, channelName, messageID);
 });
 
 client.login(process.env.DISCORD_TOKEN);
