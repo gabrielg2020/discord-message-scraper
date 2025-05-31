@@ -1,43 +1,47 @@
-import { Client, Events, GatewayIntentBits } from 'discord.js';
-import type { GuildChannel } from 'discord.js';
-import * as dotenv from 'dotenv';
-import { Blacklist } from './utils/blacklist';
-import { DatabaseManager } from './utils/db';
+import { Client, Events, GatewayIntentBits } from "discord.js";
+import type { GuildChannel } from "discord.js";
+import * as dotenv from "dotenv";
+import { Blacklist } from "./utils/blacklist";
+import { DatabaseManager } from "./utils/db";
 
 // Load env variables
 dotenv.config();
 
 // Create and initalise DatabaseManager
-const dbManager = new DatabaseManager;
+const dbManager = new DatabaseManager();
 
 // Create Client
 const client = new Client({
-  intents: [
-    GatewayIntentBits.GuildMessages,
-    GatewayIntentBits.Guilds,
-    GatewayIntentBits.MessageContent
-  ]
-})
+	intents: [
+		GatewayIntentBits.GuildMessages,
+		GatewayIntentBits.Guilds,
+		GatewayIntentBits.MessageContent,
+	],
+});
 
 // Create Blacklist
-const blacklist = new Blacklist;
+const blacklist = new Blacklist();
 
 client.once(Events.ClientReady, (readyClient) => {
-  console.log(`Ready! Logged in as ${readyClient.user.tag}`)
-  console.log(`Blacklist: ${blacklist.memebers}`)
-})
+	console.log(`Ready! Logged in as ${readyClient.user.tag}`);
+	console.log(`Blacklist: ${blacklist.memebers}`);
+});
 
 // Listen for messages
 client.on(Events.MessageCreate, async (message) => {
-  // Get messages channel
-  const channelName = (message.channel as GuildChannel).name;
+	// Get messages channel
+	const channelName = (message.channel as GuildChannel).name;
 
-  // Store message in database 
-  if (!blacklist.isMemberBlacklisted(message.author.username)) {
-    dbManager.addMessage(message.content, new Date(message.createdTimestamp), channelName);
-  } else {
-    dbManager.addMessage("Blocked Message", new Date(), channelName);
-  }
+	// Store message in database
+	if (!blacklist.isMemberBlacklisted(message.author.username)) {
+		dbManager.addMessage(
+			message.content,
+			new Date(message.createdTimestamp),
+			channelName,
+		);
+	} else {
+		dbManager.addMessage("Blocked Message", new Date(), channelName);
+	}
 });
 
 client.login(process.env.DISCORD_TOKEN);

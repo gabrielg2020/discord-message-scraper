@@ -6,7 +6,9 @@
     "start": "ts-node src/index.ts",
     "build": "tsc && copyfiles -u 1 'src/db/**/*.{db,sql}' 'src/blacklist.json' dist/",
     "dev": "ts-node-dev src/index.ts",
-    "lint": "biome check src"
+    "lint": "biome check src",
+    "format": "biome check src --fix",
+    "format:unsafe": "biome check src --fix --unsafe"
   },
   "repository": {
     "type": "git",
