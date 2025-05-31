@@ -16,6 +16,5 @@ jobs:
         with:
           node-version: 22.x
 
-      #  TODO: add linting
-      #  name: Run Lint
-      #  uses:
+      - name: Run Lint
+        run: "npm run lint"
