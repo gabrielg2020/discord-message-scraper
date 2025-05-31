@@ -1,4 +1,5 @@
 import { Client, Events, GatewayIntentBits } from 'discord.js';
+import type { GuildChannel } from 'discord.js';
 import * as dotenv from 'dotenv';
 import { Blacklist } from './utils/blacklist';
 import { DatabaseManager } from './utils/db';
@@ -28,10 +29,14 @@ client.once(Events.ClientReady, (readyClient) => {
 
 // Listen for messages
 client.on(Events.MessageCreate, async (message) => {
+  // Get messages channel
+  const channelName = (message.channel as GuildChannel).name;
+
+  // Store message in database 
   if (!blacklist.isMemberBlacklisted(message.author.username)) {
-    dbManager.addMessage(message.content, new Date(message.createdTimestamp));
+    dbManager.addMessage(message.content, new Date(message.createdTimestamp), channelName);
   } else {
-    dbManager.addMessage("Blocked Message", new Date());
+    dbManager.addMessage("Blocked Message", new Date(), channelName);
   }
 });
 
