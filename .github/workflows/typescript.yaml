@@ -16,7 +16,7 @@ jobs:
         with:
           node-version: 22.x
 
-      - name: Installed NPM Dependencies
+      - name: Install NPM Dependencies
         run: npm i
 
       - name: Run Lint
