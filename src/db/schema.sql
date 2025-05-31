@@ -5,7 +5,8 @@ CREATE TABLE messages (
   timestamp TEXT NOT NULL,
   isRelevant INTEGER NOT NULL,
   channel TEXT NOT NULL,
-  conversation INTEGER
+  conversationID INTEGER,
+  FOREIGN KEY (conversationID) REFERENCES conversation(id)
 );
 
 CREATE TABLE conversation (
@@ -19,6 +20,4 @@ CREATE TABLE attachments (
   messageID TEXT NOT NULL,
   FOREIGN KEY (messageID) REFERENCES messages(messageID)
 );
-
-
 
