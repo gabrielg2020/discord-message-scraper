@@ -29,26 +29,26 @@ client.once(Events.ClientReady, (readyClient) => {
 
 // Listen for messages
 client.on(Events.MessageCreate, async (message) => {
-  // Default
-  let textContent = "Blocked Message Content";
-  let timestamp = new Date();
-  let channelName = "Blocked Message Channel";
-  let messageID = "Blocked Message ID";
+	// Default
+	let textContent = "Blocked Message Content";
+	let timestamp = new Date();
+	let channelName = "Blocked Message Channel";
+	let messageID = "Blocked Message ID";
 
 	if (!blacklist.isMemberBlacklisted(message.author.username)) {
-    // Get data
-    textContent = message.content;
-    timestamp = new Date(message.createdTimestamp);
-    channelName = (message.channel as GuildChannel).name;
-    messageID = message.id;
+		// Get data
+		textContent = message.content;
+		timestamp = new Date(message.createdTimestamp);
+		channelName = (message.channel as GuildChannel).name;
+		messageID = message.id;
 
-    // Check for attachments
-    for (const [_, attachment] of message.attachments) {
-      dbManager.addAttachment(attachment.url, messageID);
-    }
-  }
-  
-  // Store in database
+		// Check for attachments
+		for (const [_, attachment] of message.attachments) {
+			dbManager.addAttachment(attachment.url, messageID);
+		}
+	}
+
+	// Store in database
 	dbManager.addMessage(textContent, timestamp, channelName, messageID);
 });
 

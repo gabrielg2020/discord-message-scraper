@@ -45,7 +45,12 @@ export class DatabaseManager {
 		});
 	}
 
-	public addMessage(messageContent: string, timestamp: Date, channel: string, messageID: string) {
+	public addMessage(
+		messageContent: string,
+		timestamp: Date,
+		channel: string,
+		messageID: string,
+	) {
 		if (!this.db) {
 			console.error("Database does not exist");
 			return;
@@ -67,27 +72,23 @@ export class DatabaseManager {
 		);
 	}
 
-  public addAttachment(url: string, messageID: string) {
-    if (!this.db) {
-      console.error("Database does not exist");
-      return;
-    }
+	public addAttachment(url: string, messageID: string) {
+		if (!this.db) {
+			console.error("Database does not exist");
+			return;
+		}
 
-    const query: string =
-      "INSERT INTO attachments (url, messageID) VALUES (?, ?)";
+		const query: string =
+			"INSERT INTO attachments (url, messageID) VALUES (?, ?)";
 
-    this.db.run(
-      query,
-      [url, messageID],
-      (error) => {
-        if (error) {
-          console.error("An error occured when adding an attachement ", error);
-        } else {
-          console.log("Attachement has been successfully added!");
-        }
-      },
-    );
-  }
+		this.db.run(query, [url, messageID], (error) => {
+			if (error) {
+				console.error("An error occured when adding an attachement ", error);
+			} else {
+				console.log("Attachement has been successfully added!");
+			}
+		});
+	}
 
 	private loadQuery(fileName: string): string {
 		const queryFilePath: string = path.join(__dirname, `../db/${fileName}`);
