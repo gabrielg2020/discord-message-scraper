@@ -3,6 +3,7 @@ CREATE TABLE messages (
   content TEXT NOT NULL,
   timestamp TEXT NOT NULL,
   isRelevant INTEGER NOT NULL,
+  channel TEXT NOT NULL,
   conversation INTEGER
 );
 

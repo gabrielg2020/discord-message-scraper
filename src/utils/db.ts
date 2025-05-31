@@ -45,15 +45,15 @@ export class DatabaseManager {
     });
   }
 
-  public addMessage(messageContent: string, timestamp: Date) {
+  public addMessage(messageContent: string, timestamp: Date, channel: string) {
     if (!this.db) {
       console.error('Database does not exist')
       return
     }
 
-    const query: string = `INSERT INTO messages (content, timestamp, isRelevant) VALUES (?, ?, 0)`;
+    const query: string = "INSERT INTO messages (content, timestamp, isRelevant, channel) VALUES (?, ?, 0, ?)";
 
-    this.db.run(query, [messageContent, timestamp.toISOString()], (error) => {
+    this.db.run(query, [messageContent, timestamp.toISOString(), channel], (error) => {
       if (error) {
         console.error("An error occured when initialising schema: ", error);
       } else {
