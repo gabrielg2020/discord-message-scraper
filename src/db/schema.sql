@@ -15,7 +15,9 @@ CREATE TABLE conversation (
 
 CREATE TABLE attachments (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
-  link TEXT NOT NULL
+  url TEXT NOT NULL,
+  messageID TEXT NOT NULL,
+  FOREIGN KEY (messageID) REFERENCES messages(messageID)
 );
 
 

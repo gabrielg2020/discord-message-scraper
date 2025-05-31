@@ -41,6 +41,11 @@ client.on(Events.MessageCreate, async (message) => {
     timestamp = new Date(message.createdTimestamp);
     channelName = (message.channel as GuildChannel).name;
     messageID = message.id;
+
+    // Check for attachments
+    for (const [_, attachment] of message.attachments) {
+      dbManager.addAttachment(attachment.url, messageID);
+    }
   }
   
   // Store in database
