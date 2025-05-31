@@ -42,6 +42,16 @@ client.on(Events.MessageCreate, async (message) => {
 		channelName = (message.channel as GuildChannel).name;
 		messageID = message.id;
 
+		// Check for mentions
+		for (const [_, user] of message.mentions.users) {
+			textContent = textContent.replace(
+				new RegExp(`<@!?${user.id}>`, "g"),
+				`@${user.username}`,
+			);
+		}
+
+		console.log(textContent);
+
 		// Check for attachments
 		for (const [_, attachment] of message.attachments) {
 			dbManager.addAttachment(attachment.url, messageID);
